@@ -8,8 +8,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "aurelia-bootstrapper": "^2.3.2",
-    "aurelia-animator-css": "^1.0.4"
+    "aurelia-animator-css": "^1.0.4",
+    "aurelia-bootstrapper": "^2.3.2"
   },
   "devDependencies": {
     "aurelia-cli": "^1.0.2",
@@ -60,7 +60,11 @@
   ],
   "scripts": {
     "build": "au build",
-    "start": "au run"
+    "start": "au run",
+    "test": "echo %npm_package_name% && echo %npm_package_version%",
+    "dockerBuildAndPush": "docker build -t hanyao94/event-test-web:%npm_package_version% ../event-test-web/docker && docker push hanyao94/event-test-web:%npm_package_version%",
+    "prepackageImage": "au build --env stage",
+    "packageImage": "cd dist && tar -czf tower-build.tar.gz * && copy tower-build.tar.gz ..\\docker\\ && npm run dockerBuildAndPush"
   },
   "engines": {
     "node": ">=8.9.0"
